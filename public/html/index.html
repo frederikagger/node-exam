@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-form">
+        <h1 style="text-align: center">Hej ${username}</h1>
+        <button class="btn" onclick="logout()">Log ud</button>
+
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+
+    <script src="../js/script.js" async defer></script>
+  </body>
+</html>
+
+<script>
+  window.addEventListener("beforeunload", ()=>{
+    const username = document.cookie.username;
+    console.log(username);
+  });
+
+  const logout = () => {
+    axios
+      .delete("/logout")
+      .then((response) => {
+        window.location.replace("/");
+      })
+      .catch((error) => {
+        const alert = createAlert(error.response.statusText);
+        const loginForm = document.querySelector(".btn");
+        loginForm.after(alert);
+        removeAlert();
+      });
+  };
+</script>
