@@ -1,0 +1,50 @@
+{
+  "name": "exam-kea",
+  "version": "0.0.1",
+  "description": "Exam project for nodejs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "nodemon -r dotenv/config index.js",
+    "test": "jest --watch --detectOpenHandles",
+    "build-css": "tailwindcss build tailwindcss/styles.css -o public/css/styles.css"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frederikagger/node-exam.git"
+  },
+  "keywords": [],
+  "author": "Frederik Agger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frederikagger/node-exam/issues"
+  },
+  "homepage": "https://github.com/frederikagger/node-exam#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.13",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.4.14",
+    "tailwindcss": "^1.9.6",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "debug": "^4.2.0",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  }
+}
