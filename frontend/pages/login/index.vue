@@ -52,6 +52,8 @@ export default {
           user: this.user
         });
         console.log(token);
+        this.$store.dispatch('login', token);
+        this.$router.replace("/");
       } catch (error) {
         console.log(error);
       }
