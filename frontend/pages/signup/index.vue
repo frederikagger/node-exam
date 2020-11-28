@@ -70,7 +70,7 @@
         >
       </div>
 
-      <button :style="{disbled: user}"
+      <button
         @click="signup"
         class="bg-indigo-500 mb-4 shadow-md text-lg text-white font-medium h-10 rounded-md hover:bg-indigo-400"
       >
@@ -102,7 +102,6 @@ export default {
   methods: {
     async signup() {
       try {
-        console.log(this.user);
         await this.$axios.$post("/register", {
           user: this.user
         });
