@@ -53,7 +53,7 @@
         class="p-1 placeholder-gray-600 focus:placeholder-gray-400 border mb-4 text-black text-lg bg-indigo-100 rounded-md border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         placeholder="Country"
       >
-        <option disabled hidden>Country</option>
+        <option value="" disabled hidden>Country</option>
         <option v-for="country in countries" :key="country" :value="country">{{
           country
         }}</option>
@@ -106,7 +106,7 @@ export default {
         await this.$axios.$post("/register", {
           user: this.user
         });
-        window.location.replace("/login");
+        this.$router.push("/login");
       } catch (error) {
         console.log(error);
       }
@@ -114,5 +114,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
