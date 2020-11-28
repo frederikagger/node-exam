@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
     if (!user) {
       throw new createError("401", "Authentication failed");
     }
-    req.user = user;
+    req.user = user; // Sending the user with the request so the next route handlers dont need to fetch the user from db
     next();
   } catch (error) {
     next(error);
