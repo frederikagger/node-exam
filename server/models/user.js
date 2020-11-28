@@ -8,13 +8,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   lastname: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   email: {
     type: String,
@@ -61,7 +59,10 @@ userSchema.methods.createJWT = async function () {
 
 userSchema.pre("save", async function (next) {
   const user = this;
-  user.password = await bcrypt.hash(user.password, parseInt(process.env.SALT));
+  if (user.isModified("password")){
+    user.password = await bcrypt.hash(user.password, parseInt(process.env.SALT));
+  }
+ 
   next();
 });
 
