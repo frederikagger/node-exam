@@ -50,7 +50,7 @@ userSchema.methods.createJWT = async function () {
   const user = this;
   const token = jwt.sign(
     { _id: user._id.toString(), exp: Math.floor(Date.now() / 1000) + 60 * 60 }, // one hour
-    process.env.secret
+    process.env.SECRET
   );
   user.tokens = user.tokens.concat({ token });
   await user.save();
