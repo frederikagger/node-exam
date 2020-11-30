@@ -31,6 +31,12 @@
         Don't have an account yet?
         <NuxtLink to="/signup" class="text-pink-600">Sign up</NuxtLink>
       </div>
+      <div
+        v-if="error"
+        class="bg-pink-600 rounded-md mt-4 text-white p-2 font-medium text-center text-lg"
+      >
+        {{ error }}
+      </div>
     </div>
   </div>
 </template>
@@ -42,7 +48,8 @@ export default {
       user: {
         email: "",
         password: ""
-      }
+      },
+      error: ""
     };
   },
   methods: {
@@ -51,10 +58,11 @@ export default {
         const token = await this.$axios.$post("/login", {
           user: this.user
         });
-        console.log(token);
-        this.$store.dispatch('login', token);
+        this.$store.dispatch("login", token);
+        this.$axios.setToken(token);
         this.$router.replace("/");
       } catch (error) {
+        this.error = error.response.statusText;
         console.log(error);
       }
     }
