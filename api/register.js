@@ -5,7 +5,7 @@ router.post("/register", async (req, res, next) => {
   try{
     const user = new User(req.body.user);
     await user.save();
-    console.log(`User ${user.username} was created`);
+    console.log(`User ${user} was created`);
     return res.status(201).send();
   } catch (error) {
     next(error);
