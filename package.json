@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "export NODE_ENV=production && node app.js",
+    "start": "export NODE_ENV=production && node -r dotenv/config index.js",
     "dev": "nodemon -r dotenv/config index.js",
     "test": "jest --watch --detectOpenHandles",
     "build-css": "tailwindcss build tailwindcss/styles.css -o public/css/styles.css"
