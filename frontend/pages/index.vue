@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
-    
-  </div>
+  <Header/>
 </template>
 
 <script>
+import Header from '../components/Header.vue'
 export default {
-  middleware: "auth"
+  components: { Header },
+  middleware: "auth",
+
 }
 </script>
 
