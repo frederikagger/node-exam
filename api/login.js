@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 
 router.post("/login", async (req, res, next) => {
   try {
-    const user = await User.findOne({email: req.body.user.email});
+    const user = await User.findOne({email: req.body.user.email.toLowerCase()});
     if (!user) {
       throw createError(400, "No user with the current username exist");
     }
