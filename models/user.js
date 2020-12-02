@@ -8,11 +8,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    validate(value){
+      if (!value){
+        throw new Error("Name can't be empty")
+      }
+    }
   },
   lastname: {
     type: String,
     required: true,
     trim: true,
+    validate(value){
+      if (!value){
+        throw new Error("Name can't be empty")
+      }
+    }
   },
   email: {
     type: String,
@@ -65,7 +75,6 @@ userSchema.pre("save", async function (next) {
   if (user.isModified("password")){
     user.password = await bcrypt.hash(user.password, parseInt(process.env.SALT));
   }
- 
   next();
 });
 
