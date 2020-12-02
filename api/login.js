@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const createError = require("http-errors");
-const auth = require("../middleware/auth");
+
 
 router.post("/login", async (req, res, next) => {
   try {
@@ -19,15 +19,6 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.delete("/logout", auth, async (req, res, next) => {
-  const user = req.user;
-  user.tokens = [];
-  try {
-    await user.save();
-    return res.status(200).send("User was logged out");
-  } catch (error) {
-    next(error);
-  }
-});
+
 
 module.exports = router;
