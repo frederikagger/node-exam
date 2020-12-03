@@ -8,18 +8,12 @@ router.get("/user", auth, async (req, res) => {
 
 //todo: fix patch route to also handle password changes
 router.patch("/user", auth, async (req, res, next) => {
-  try {
-    const { _id } = req.user;
-    const user = await User.findOneAndUpdate({_id}, req.body.user, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false
-    });
-    if (!user) {
-      return res.status(404).send();
-    }
-    console.log(`User ${user.firstname} was updated`);
-    return res.send(user);
+  const updates = Object.keys(req.body.user);
+  try {    
+    updates.forEach((update) => req.user[update] = req.body.user[update]);
+    console.log(req.user);
+    await req.user.save();
+    return res.send(req.user);
   } catch (error) {
     next(error);
   }
@@ -27,7 +21,7 @@ router.patch("/user", auth, async (req, res, next) => {
 
 router.delete("/user", auth, async (req, res, next) => {
   try {
-    await req.user.delete();
+    await req.user.remove();
     console.log("User deleted");
     return res.status(200).send();
   } catch (error) {
