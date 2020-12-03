@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/frederikagger/node-exam#readme",
   "dependencies": {
+    "aws-sdk": "^2.802.0",
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
@@ -38,8 +39,11 @@
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "nodemailer": "^6.4.14",
+    "sharp": "^0.26.3",
     "tailwindcss": "^1.9.6",
+    "uuid": "^8.3.1",
     "validator": "^13.1.17"
   },
   "devDependencies": {
