@@ -38,7 +38,9 @@ router.post(
   async (req, res, next) => {
     try {
       const url = await uploadAWS(req.image);
-      console.log(url); //todo: save the url to db!
+      // if (imageExist){ delete image from aws }
+      req.user.profilePicURL = 'https://node-exam.s3.eu-west-2.amazonaws.com/'+url;
+      await req.user.save();
       return res.status(201).send();
     } catch (error) {
       next(error);
