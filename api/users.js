@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 router.get("/users", auth, async (req, res, next) => {
   try {
-    users = await User.find({}, "firstname lastname profilePicURL _id").exec();
+    users = await User.find({}, "firstname lastname profilePicURL _id country").exec();
     return res.send(users);
   } catch (error) {
     next(error);
