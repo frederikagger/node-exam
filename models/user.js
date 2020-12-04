@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  imageURL: {
+  profilePicURL: {
     type: String,
   },
   tokens: [
