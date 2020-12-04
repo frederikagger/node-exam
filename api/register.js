@@ -8,8 +8,8 @@ router.post("/register", async (req, res, next) => {
     if (!firstname, !lastname, !email, !birthday, !password, !country){
       throw new createError(400, "Bad request");
     }
+    req.body.user.email = req.body.user.email.toLowerCase();
     const user = new User(req.body.user);
-    user.email = user.email.toLowerCase();
     await user.save();
     return res.status(201).send();
   } catch (error) {
