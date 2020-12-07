@@ -57,6 +57,8 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+}, {
+  timestamps: true
 });
 
 userSchema.methods.createJWT = async function () {
