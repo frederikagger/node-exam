@@ -41,7 +41,7 @@ router.post(
       // if (imageExist){ delete image from aws }
       req.user.profilePicURL = 'https://node-exam.s3.eu-west-2.amazonaws.com/'+url;
       await req.user.save();
-      return res.status(201).send();
+      return res.status(201).send({user: req.user});
     } catch (error) {
       next(error);
     }
