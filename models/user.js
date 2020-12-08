@@ -8,11 +8,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    validate(value){
+      if (!value){
+        throw new Error("Name can't be empty")
+      }
+    }
   },
   lastname: {
     type: String,
     required: true,
     trim: true,
+    validate(value){
+      if (!value){
+        throw new Error("Name can't be empty")
+      }
+    }
   },
   email: {
     type: String,
@@ -36,6 +46,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  profilePicURL: {
+    type: String,
+  },
   tokens: [
     {
       token: {
@@ -44,13 +57,15 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+}, {
+  timestamps: true
 });
 
 userSchema.methods.createJWT = async function () {
   const user = this;
   const token = jwt.sign(
     { _id: user._id.toString(), exp: Math.floor(Date.now() / 1000) + 60 * 60 }, // one hour
-    process.env.secret
+    process.env.SECRET
   );
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -62,7 +77,6 @@ userSchema.pre("save", async function (next) {
   if (user.isModified("password")){
     user.password = await bcrypt.hash(user.password, parseInt(process.env.SALT));
   }
- 
   next();
 });
 
