@@ -1,17 +1,22 @@
 const app = require("./app");
 const server = require("http").createServer(app);
-const io = require("./io")(server)
-
-
-io.use((socket, next) => {
-  console.log(socket.id);
-  next();
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
 });
 
+const online = [];
+
 io.on("connection", async (socket) => {
-  console.log("client connected");
+  socket.on("name", (message) => {
+    const { name } = message;
+    online.push(name);
+    console.log(online);
+  });
+
   socket.on("chat message", ({ message }) => {
-    console.log(message);
     io.emit("server emit", { message });
   });
 });
