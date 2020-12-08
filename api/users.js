@@ -9,7 +9,7 @@ router.get("/users", auth, async (req, res, next) => {
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec();
-    return res.send(users);
+    return res.status(200).send(users);
   } catch (error) {
     next(error);
   }
